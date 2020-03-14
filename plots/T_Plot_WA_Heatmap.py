@@ -29,26 +29,31 @@ class DataPlot:
         self._plot_state_data()
 
     def _load_covid_data(self):
-        # dfs = pd.read_html(self.d['url'])
-        rows = self.d['raw'].split('\n')
-        self.county_data = {}
+        import plots.Selenium_Scraper as ss
+        scraper = ss.SeleniumScraper()
+        self.county_data = scraper.load()
 
-        for idx, row in enumerate(rows):
-            cols = row.split('\t')
-
-            if len(cols) < 3:
-                continue
-
-            key = cols[0]
-            if len(key) < 1:
-                continue
-
-            cfg = {
-                'Confirmed_Cases': int(cols[1]),
-                'Deaths': cols[2],
-            }
-
-            self.county_data[key] = cfg
+    # def _load_covid_data(self):
+    #     # dfs = pd.read_html(self.d['url'])
+    #     rows = self.d['raw'].split('\n')
+    #     self.county_data = {}
+    #
+    #     for idx, row in enumerate(rows):
+    #         cols = row.split('\t')
+    #
+    #         if len(cols) < 3:
+    #             continue
+    #
+    #         key = cols[0]
+    #         if len(key) < 1:
+    #             continue
+    #
+    #         cfg = {
+    #             'Confirmed_Cases': int(cols[1]),
+    #             'Deaths': cols[2],
+    #         }
+    #
+    #         self.county_data[key] = cfg
 
     def _init_viz_schema(self):
         self.state_counties = {
