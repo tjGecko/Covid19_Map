@@ -10,6 +10,9 @@ from bokeh.palettes import PiYG as colors
 from bokeh.plotting import figure
 import pandas as pd
 from bokeh.sampledata.us_counties import data as counties
+import time
+import json
+import os
 
 
 class DataPlot:
@@ -32,6 +35,15 @@ class DataPlot:
         import plots.Selenium_Scraper as ss
         scraper = ss.SeleniumScraper()
         self.county_data = scraper.load()
+
+        filename = f'History_{time.time()}.json'
+        abs_path = os.path.join(self.d['history_dir'], filename)
+
+        with open(abs_path, 'w') as fout:
+            json.dump(self.county_data, fout, indent=4, sort_keys=True)
+
+        print(f'Wrote: {abs_path}')
+
 
     # def _load_covid_data(self):
     #     # dfs = pd.read_html(self.d['url'])
@@ -143,7 +155,7 @@ Yakima	2	0
     d = {
         'url': 'https://www.doh.wa.gov/Emergencies/Coronavirus',
         'raw': raw,
-        'amplifier': 10
+        'history_dir': 'C:/Users/TJ Hoeft/Python_Projects/Covid19/history'
     }
 
     plt = DataPlot(config=d)
