@@ -132,30 +132,9 @@ class DataPlot:
 
 
 if __name__ == '__main__':
-
-
-    raw = '''
-Clark	1	0
-Columbia	1	0
-Grant	1	1
-Grays Harbor	1	0
-Island	3	0
-Jefferson	1	0
-King	328	32
-Kitsap	3	0
-Kittitas	3	0
-Pierce	19	0
-Skagit	3	0
-Snohomish	133	4
-Thurston	1	0
-Whatcom	1	0
-Yakima	2	0
-    '''
-
     d = {
         'url': 'https://www.doh.wa.gov/Emergencies/Coronavirus',
-        'raw': raw,
-        'history_dir': 'C:/Users/TJ Hoeft/Python_Projects/Covid19/history'
+        'history_dir': 'C:/Users/TJ Hoeft/Python_Projects/Covid19/history/WA'
     }
 
     plt = DataPlot(config=d)
